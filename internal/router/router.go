@@ -1,10 +1,11 @@
-package server
+package router
 
 import (
 	"context"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/pdstuber/fiber-test/internal/api/handlers"
 )
 
 const shutdownTimeout = 5 * time.Second
@@ -18,9 +19,7 @@ type Server struct {
 func New(listenPort string) *Server {
 	app := fiber.New()
 
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, World 👋!")
-	})
+	app.Get("/", handlers.Hello)
 
 	return &Server{
 		listenPort: listenPort,

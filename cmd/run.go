@@ -1,6 +1,3 @@
-/*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-*/
 package cmd
 
 import (
@@ -10,7 +7,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/pdstuber/fiber-test/internal/server"
+	"github.com/pdstuber/fiber-test/internal/router"
 	"github.com/spf13/cobra"
 )
 
@@ -28,7 +25,7 @@ to quickly create a Cobra application.`,
 		ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
 		defer stop()
 
-		server := server.New(":4000")
+		server := router.New(":4000")
 		if err := server.Start(ctx); err != nil {
 			log.Panic(err)
 		}
